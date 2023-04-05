@@ -1,9 +1,12 @@
 import React from 'react';
+import './App.css';
+
+import Rotas from './Components/Routes/';
 
 export default function App(){
     return(
         <div className='App'>
-            <h1>Teste</h1>
+            <Rotas/>
         </div>
     );
 }
