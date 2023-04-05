@@ -10,3 +10,20 @@
 .header h1{
     text-shadow: 1px 1px 10px rgb(168, 168, 168);
 }
+
+
+@media screen and (max-width: 480px){
+    .header{
+    background-color: darkblue;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    color: white;
+}
+
+.header h1{
+    text-shadow: 1px 1px 10px rgb(168, 168, 168);
+    font-size: 22px;
+}
+}
