@@ -27,46 +27,100 @@ const Main = (props) => {
         let Month = Data_atual.getMonth() + 1;
         let Year = Data_atual.getFullYear();
 
-        return [Day, Month-1, Year];
+        return [Day, Month, Year];
     }
 
     const return_Next_holiday = (holiday) => {
         let Data_atual = Data_hoje();
 
-        
-        let Verify_holiday = [];
-        let Verify_holiday_month_today = [];
+        let Feriados = holiday;
 
+        let Verify_holiday = [];
+        let Index_feriado;
+      
         for (let feriado of holiday){
-            if (parseInt(feriado.data.substring(0, 2)) > Data_atual[1]){
+            if (parseInt(feriado.data.substring(0, 2)) >= Data_atual[1]){
                 Verify_holiday.push({nome_feriado: feriado.nome, data_feriado: feriado.data});
             }
-        }    
-
-        for (let feriado of holiday){
-            if (parseInt(feriado.data.substring(0, 2)) == Data_atual[1]){
-                Verify_holiday_month_today.push({nome_feriado: feriado.nome, data_feriado: feriado.data});
+        }   
+        
+        for (let index in holiday){
+            if (parseInt(holiday[index].data.substring(0, 2)) >= Data_atual[1]){
+                Index_feriado = index;
                 break;
             }
         }
         
-
-        
-        if (Verify_holiday_month_today[0].data_feriado.substring(0, 2) == Data_atual[1]){
+        if (parseInt(Verify_holiday[0].data_feriado.substring(0, 2)) == Data_atual[1]){
             setTitleFeriadoToday("Este mês tem Feriado!");
-            setNomeFeriadoToday(Verify_holiday_month_today[0].nome_feriado);
-            setDataFeriadoToday(Verify_holiday_month_today[0].data_feriado);
 
-            setNomeFeriado1(Verify_holiday[0].nome_feriado);
-            setDataFeriado1(Verify_holiday[0].data_feriado);
+            if ( Index_feriado == holiday.length - 3){
 
-            setNomeFeriado2(Verify_holiday[1].nome_feriado);
-            setDataFeriado2(Verify_holiday[1].data_feriado);
+                setNomeFeriadoToday(Verify_holiday[0].nome_feriado);
+                setDataFeriadoToday(Verify_holiday[0].data_feriado);
 
-            setNomeFeriado3(Verify_holiday[2].nome_feriado);
-            setDataFeriado3(Verify_holiday[2].data_feriado);
+                setNomeFeriado1(Verify_holiday[1].nome_feriado);
+                setDataFeriado1(Verify_holiday[1].data_feriado);
+
+                setNomeFeriado2(Verify_holiday[2].nome_feriado);
+                setDataFeriado2(Verify_holiday[2].data_feriado);
+
+                setNomeFeriado3(holiday[0].nome);
+                setDataFeriado3(holiday[0].data);
+
+            } else if (Index_feriado == (holiday.length - 2)){
+                setTitleFeriadoToday("Este mês tem Feriado!");
+
+                setNomeFeriadoToday(Verify_holiday[0].nome_feriado);
+                setDataFeriadoToday(Verify_holiday[0].data_feriado);
+
+                setNomeFeriado1(Verify_holiday[1].nome_feriado);
+                setDataFeriado1(Verify_holiday[1].data_feriado);
+
+                setNomeFeriado2(holiday[0].nome);
+                setDataFeriado2(holiday[0].data);
+
+                setNomeFeriado3(holiday[1].nome);
+                setDataFeriado3(holiday[1].data);
+
+            } else if (Index_feriado == (holiday.length - 1)){
+                setTitleFeriadoToday("Este mês tem Feriado!");
+
+                setNomeFeriadoToday(Verify_holiday[0].nome_feriado);
+                setDataFeriadoToday(Verify_holiday[0].data_feriado);
+
+                setNomeFeriado1(holiday[0].nome);
+                setDataFeriado1(holiday[0].data);
+
+                setNomeFeriado2(holiday[1].nome);
+                setDataFeriado2(holiday[1].data);
+
+                setNomeFeriado3(holiday[2].nome);
+                setDataFeriado3(holiday[2].data);
+
+            } else{ 
+
+                setTitleFeriadoToday("Este mês tem Feriado!");
+
+                setNomeFeriadoToday(Verify_holiday[0].nome_feriado);
+                setDataFeriadoToday(Verify_holiday[0].data_feriado);
+
+                setNomeFeriado1(Verify_holiday[1].nome_feriado);
+                setDataFeriado1(Verify_holiday[1].data_feriado);
+
+                setNomeFeriado2(Verify_holiday[2].nome_feriado);
+                setDataFeriado2(Verify_holiday[2].data_feriado);
+
+                setNomeFeriado3(Verify_holiday[3].nome_feriado);
+                setDataFeriado3(Verify_holiday[3].data_feriado);
+            }
+
         } else{
             setTitleFeriadoToday("Este mês não tem Feriado!");
+
+            setNomeFeriadoToday('-');
+            setDataFeriadoToday('-');
+
             setNomeFeriado1(Verify_holiday[0].nome_feriado);
             setDataFeriado1(Verify_holiday[0].data_feriado);
 
@@ -76,10 +130,6 @@ const Main = (props) => {
             setNomeFeriado3(Verify_holiday[2].nome_feriado);
             setDataFeriado3(Verify_holiday[2].data_feriado);
         }
-        
-
-
-        
     }
 
     const Exibir_Feriados = () => {
@@ -91,14 +141,12 @@ const Main = (props) => {
 
         let Feriados_list = Feriados;
 
-        let Feriados_posterires = return_Next_holiday(Feriados_list);
+        return_Next_holiday(Feriados_list);
 
-        
-        
     }
 
     return(
-        <div className="main">
+        <div className="main"> 
             <header>
                 <Header/>
             </header>
@@ -110,27 +158,27 @@ const Main = (props) => {
                     </div>
                     <div className='today-holiday holiday'>
                         <p id='title_holiday_today'>{title_Feriado}</p>
-                        <p><span>Nome do feriado:</span> {nome_Feriado_today}</p>
-                        <p><span>Data:</span> {data_Feriado_today}</p>
+                        <p><span>Nome do feriado:</span><span className='span_Dados'> {nome_Feriado_today}</span></p>
+                        <p><span>Data:</span><span className='span_Dados'> {data_Feriado_today}</span></p>
                         <div className='border_botton_decoration'></div>
                     </div>
                     <div className="next-holidays">
                         <div className='holiday'>
-                            <p className='title_next_holidays'>Próximo feriado:</p>
-                            <p><span>Nome do feriado:</span> {nome_Feriado_1}</p>
-                            <p><span>Data:</span> {data_Feriado_1}</p>
+                            <p className='title_next_holidays'>Próximos feriados:</p>
+                            <p><span>Nome do feriado:</span><span className='span_Dados'> {nome_Feriado_1}</span></p>
+                            <p><span>Data:</span><span className='span_Dados'> {data_Feriado_1}</span></p>
                             <div className='border_botton_decoration'></div>
                         </div>
                         <div className='holiday'>
-                            <p className='title_next_holidays'>Próximo feriado:</p>
-                            <p><span>Nome do feriado:</span> {nome_Feriado_2}</p>
-                            <p><span>Data:</span> {data_Feriado_2}</p>
+                            <p className='title_next_holidays'>Próximos feriados:</p>
+                            <p><span>Nome do feriado:</span><span className='span_Dados'> {nome_Feriado_2}</span></p>
+                            <p><span>Data:</span><span className='span_Dados'> {data_Feriado_2}</span></p>
                             <div className='border_botton_decoration'></div>
                         </div>
                         <div className='holiday'>
-                            <p className='title_next_holidays'>Próximo feriado:</p>
-                            <p><span>Nome do feriado:</span> {nome_Feriado_3}</p>
-                            <p><span>Data:</span> {data_Feriado_3}</p>
+                            <p className='title_next_holidays'>Próximos feriados:</p>
+                            <p><span>Nome do feriado:</span><span className='span_Dados'> {nome_Feriado_3}</span></p>
+                            <p><span>Data:</span><span className='span_Dados'> {data_Feriado_3}</span></p>
                             <div className='border_botton_decoration'></div>
                         </div>
                     </div>
