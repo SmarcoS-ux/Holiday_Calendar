@@ -40,7 +40,11 @@ const Main = (props) => {
       
         for (let feriado of holiday){
             if (parseInt(feriado.data.substring(0, 2)) >= Data_atual[1]){
-                Verify_holiday.push({nome_feriado: feriado.nome, data_feriado: feriado.data});
+                let day = feriado.data.substring(3, 5);
+                let month = feriado.data.substring(0, 2);
+                let year = Data_atual[2];
+
+                Verify_holiday.push({nome_feriado: feriado.nome, data_feriado: `${day}/${month}/${year}`});
             }
         }   
         
@@ -51,10 +55,15 @@ const Main = (props) => {
             }
         }
         
-        if (parseInt(Verify_holiday[0].data_feriado.substring(0, 2)) == Data_atual[1]){
+        if (parseInt(Verify_holiday[0].data_feriado.substring(3, 5)) == Data_atual[1]){
             setTitleFeriadoToday("Este mês tem Feriado!");
 
             if ( Index_feriado == holiday.length - 3){
+                let day_0 = holiday[0].data.substring(3, 5);
+                let month_0 = holiday[0].data.substring(0, 2);
+                let year_0 = Data_atual[2] + 1;
+
+                let data_format_0 = `${day_0}/${month_0}/${year_0}`;
 
                 setNomeFeriadoToday(Verify_holiday[0].nome_feriado);
                 setDataFeriadoToday(Verify_holiday[0].data_feriado);
@@ -66,10 +75,21 @@ const Main = (props) => {
                 setDataFeriado2(Verify_holiday[2].data_feriado);
 
                 setNomeFeriado3(holiday[0].nome);
-                setDataFeriado3(holiday[0].data);
+                setDataFeriado3(data_format_0);
 
             } else if (Index_feriado == (holiday.length - 2)){
-                setTitleFeriadoToday("Este mês tem Feriado!");
+                let day_0 = holiday[0].data.substring(3, 5);
+                let month_0 = holiday[0].data.substring(0, 2);
+                let year_0 = Data_atual[2] + 1;
+
+                let data_format_0 = `${day_0}/${month_0}/${year_0}`;
+
+                let day_1 = holiday[1].data.substring(3, 5);
+                let month_1 = holiday[1].data.substring(0, 2);
+                let year_1 = Data_atual[2] + 1;
+
+                let data_format_1 = `${day_1}/${month_1}/${year_1}`;
+
 
                 setNomeFeriadoToday(Verify_holiday[0].nome_feriado);
                 setDataFeriadoToday(Verify_holiday[0].data_feriado);
@@ -78,29 +98,43 @@ const Main = (props) => {
                 setDataFeriado1(Verify_holiday[1].data_feriado);
 
                 setNomeFeriado2(holiday[0].nome);
-                setDataFeriado2(holiday[0].data);
+                setDataFeriado2(data_format_0);
 
                 setNomeFeriado3(holiday[1].nome);
-                setDataFeriado3(holiday[1].data);
+                setDataFeriado3(data_format_1);
 
             } else if (Index_feriado == (holiday.length - 1)){
-                setTitleFeriadoToday("Este mês tem Feriado!");
+                let day_0 = holiday[0].data.substring(3, 5);
+                let month_0 = holiday[0].data.substring(0, 2);
+                let year_0 = Data_atual[2] + 1;
+
+                let data_format_0 = `${day_0}/${month_0}/${year_0}`;
+
+                let day_1 = holiday[1].data.substring(3, 5);
+                let month_1 = holiday[1].data.substring(0, 2);
+                let year_1 = Data_atual[2] + 1;
+
+                let data_format_1 = `${day_1}/${month_1}/${year_1}`;
+
+                let day_2 = holiday[2].data.substring(3, 5);
+                let month_2 = holiday[2].data.substring(0, 2);
+                let year_2 = Data_atual[2] + 1;
+
+                let data_format_2 = `${day_2}/${month_2}/${year_2}`;
 
                 setNomeFeriadoToday(Verify_holiday[0].nome_feriado);
                 setDataFeriadoToday(Verify_holiday[0].data_feriado);
 
                 setNomeFeriado1(holiday[0].nome);
-                setDataFeriado1(holiday[0].data);
+                setDataFeriado1(data_format_0);
 
                 setNomeFeriado2(holiday[1].nome);
-                setDataFeriado2(holiday[1].data);
+                setDataFeriado2(data_format_1);
 
                 setNomeFeriado3(holiday[2].nome);
-                setDataFeriado3(holiday[2].data);
+                setDataFeriado3(data_format_2);
 
             } else{ 
-
-                setTitleFeriadoToday("Este mês tem Feriado!");
 
                 setNomeFeriadoToday(Verify_holiday[0].nome_feriado);
                 setDataFeriadoToday(Verify_holiday[0].data_feriado);
@@ -116,6 +150,7 @@ const Main = (props) => {
             }
 
         } else{
+            
             setTitleFeriadoToday("Este mês não tem Feriado!");
 
             setNomeFeriadoToday('-');
